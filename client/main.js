@@ -4,7 +4,7 @@ const StatusCircuitBreaker = require('./statusCircuitBreaker.js');
 const timeout = 3000
 const failureThreshold = 3
 const statusCircuitBreaker = new StatusCircuitBreaker()
-const axios_circuit_breaker = new AxiosCircuitBreaker(timeout, failureThreshold, statusCircuitBreaker)
+const axiosCircuitBreaker = new AxiosCircuitBreaker(timeout, failureThreshold, statusCircuitBreaker)
 const HOST = 'localhost'
 const PORT = 5001
 const url = `http://${HOST}:${PORT}/service`
@@ -15,7 +15,7 @@ const config = null
 async function makeRequests() {
     for (let i = 0; i < 100; i++) {
         try {
-            const responseRes = await axios_circuit_breaker.request(method, url, data, config)
+            const responseRes = await axiosCircuitBreaker.request(method, url, data, config)
             console.log('Ответ сервера:', responseRes.status)
         }
         catch (error) {
